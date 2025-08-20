@@ -3,24 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber Awareness Demo — Simulated Incident (Legal)</title>
+  <title>Hacked By Cyber Alone</title>
   <meta name="robots" content="noindex,nofollow" />
-  <!--
-    ⚠️ PANDUAN CEPAT (LEGAL DEMO)
-    1) Ganti foto Anda pada elemen <img id="avatar"> di bawah.
-       - Letakkan file di folder ./assets/ lalu ubah src menjadi: ./assets/foto-anda.jpg
-    2) Ubah teks headline/subheadline sesuai kebutuhan (tetap sisipkan kata "SIMULATION").
-    3) Gunakan file ini hanya untuk edukasi, pameran internal, atau pelatihan keamanan — bukan untuk menyerang/merusak sistem!
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a0f14;         /* latar belakang utama */
-      --fg:#e6f1ff;         /* teks utama */
-      --accent:#00ffd0;     /* aksen neon */
-      --danger:#ff004c;     /* warna peringatan */
+      --bg:#0a0f14;
+      --fg:#e6f1ff;
+      --accent:#00ffd0;
+      --danger:#ff004c;
       --glow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 40px var(--accent);
     }
     *{box-sizing:border-box}
@@ -29,19 +22,15 @@
       background: radial-gradient(1000px 600px at 50% 10%, #0f1e2a 0%, var(--bg) 60%);
       color:var(--fg);
       font-family: 'Share Tech Mono', monospace;
-      overflow:hidden; /* biar fullscreen fokus */
+      overflow:hidden;
     }
 
-    /* Layering */
     .layer{position:fixed; inset:0;}
 
-    /* Matrix rain canvas */
     #matrix{z-index:0; opacity:.35}
 
-    /* Fire layer */
     .fire-wrap{z-index:1; pointer-events:none; display:flex; align-items:flex-end}
     .fire{position:relative; width:100%; height:25vh; overflow:visible;}
-    /* Flame columns */
     .flame{
       position:absolute; bottom:-2vh; width:6px; height:10vh; left:var(--x);
       background: radial-gradient(20px 80px at 50% 100%, rgba(255,160,0,.95), rgba(255,80,0,.6) 60%, transparent 70%);
@@ -55,7 +44,6 @@
       100% { transform: translateY(0) scaleY(1) rotate(-1deg); opacity:.95 }
     }
 
-    /* Content */
     .content{
       z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center;
       height:100vh; text-align:center; padding: clamp(16px, 3vw, 32px);
@@ -83,11 +71,8 @@
       font-size: clamp(28px, 5vw, 56px);
       text-shadow: var(--glow);
     }
-    .sub{
-      margin:0; opacity:.9; font-size: clamp(14px, 1.8vw, 18px);
-    }
+    .sub{ margin:0; opacity:.9; font-size: clamp(14px, 1.8vw, 18px); }
 
-    /* Neon pulse text (awareness slogan) */
     .pulse{
       margin-top: .4rem; font-size: clamp(16px, 2.2vw, 22px); font-weight:700;
       text-transform:uppercase; letter-spacing:.12em;
@@ -96,77 +81,39 @@
     @keyframes thump{ 10%{ transform: scale(1.06)} 20%{transform: scale(1)} }
     @keyframes glow{ from{ text-shadow:0 0 8px var(--danger), 0 0 22px var(--danger)} to{ text-shadow:0 0 4px #fff, 0 0 10px var(--accent) } }
 
-    /* Control bar */
-    .controls{
-      z-index:3; position:fixed; left:50%; transform:translateX(-50%);
-      bottom: clamp(10px, 2.5vh, 20px); display:flex; gap:10px; flex-wrap:wrap;
-      background:#0b1320cc; border:1px solid #ffffff1a; padding:.6rem .8rem; border-radius:14px;
-      backdrop-filter: blur(8px);
-    }
-    button{
-      font: inherit; color:var(--fg); background:#101a2a; border:1px solid #ffffff1a; border-radius:10px;
-      padding:.5rem .8rem; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease;
-    }
-    button:hover{ transform: translateY(-1px); box-shadow: 0 6px 20px #0008 }
-
-    /* Footer */
     .footer{ position:fixed; right:10px; top:10px; z-index:4; opacity:.7; font-size:12px; }
     .footer strong{ color:var(--accent) }
-
-    /* Responsive helpers */
-    @media (max-width: 520px){ .controls{width:92vw; justify-content:center} }
   </style>
 </head>
 <body>
-  <!-- MATRIX RAIN BACKGROUND (SIMULATION) -->
+  <!-- MATRIX RAIN -->
   <canvas id="matrix" class="layer"></canvas>
 
-  <!-- FIRE EFFECT BOTTOM -->
-  <div class="fire-wrap layer" aria-hidden="true">
-    <div id="fire" class="fire"></div>
-  </div>
+  <!-- FIRE -->
+  <div class="fire-wrap layer"><div id="fire" class="fire"></div></div>
 
-  <!-- MAIN CONTENT -->
-  <main class="content layer" aria-live="polite">
-    <span class="badge" role="status" aria-label="Simulation notice">
-      <span class="dot" aria-hidden="true"></span>
-      W A R N I N G . ! ! !
-      <span class="dot" aria-hidden="true"></span>
-    </span>
-
+  <!-- CONTENT -->
+  <main class="content layer">
+    <span class="badge"><span class="dot"></span>W A R N I N G . ! ! !<span class="dot"></span></span>
     <section class="hero">
-      <!-- GANTI FOTO ANDA DI SINI -->
-      <img id="avatar" src="./assets/foto-anda.jpg" alt="Foto peserta pelatihan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%230a0f14\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23ffffffaa\' font-family=\'Arial\' font-size=\'14\'%3EUpload ./assets/foto-anda.jpg%3C/text%3E%3C/svg%3E'"/>
-
-      <!-- HEADLINE: tetap cantumkan kata SIMULATED/SIMULATION -->
-      <h1>” Hacked by <span style="color:var(--accent)">Cyber&nbsp;Alone</span>”</h1>
-      <p class="sub">Harap Perbaiki <strong></strong> Saya bosan dengan celah sistem di negri ini .!!!</p>
+      <img id="avatar" src="https://raw.githubusercontent.com/fauzanafif/Deface-Web-/main/logo.jpeg" alt="Foto" />
+      <h1>” Hacked by <span style="color:var(--accent)">Cyber&nbsp;Alone</span> ”</h1>
+      <p class="sub">Harap Perbaiki, Ketidak Pedulian Anda Target Kami .!!!</p>
       <p class="pulse">No system is 100% safe — stay vigilant!</p>
     </section>
   </main>
 
-  <!-- CONTROLS -->
-  <div class="controls" aria-label="Effect controls">
-    <button id="toggle-rain" aria-pressed="true">Matikan Hujan Kode</button>
-    <button id="toggle-fire" aria-pressed="true">Matikan Api</button>
-    <button id="toggle-pulse" aria-pressed="true">Matikan Teks Neon</button>
-    <button id="toggle-contrast">Tema Kontras</button>
-  </div>
-
-  <div class="footer">Cyber Awareness Demo • <strong>Legal & Ethical Use Only</strong></div>
+  <div class="footer">Cyber Awareness • <strong>Wait for my report</strong></div>
 
   <script>
-    /* ============================
-       MATRIX RAIN (background)
-       ============================ */
+    /* MATRIX RAIN */
     const rainCanvas = document.getElementById('matrix');
     const rctx = rainCanvas.getContext('2d');
-    let rainOn = true;
 
     function resizeCanvas(){ rainCanvas.width = window.innerWidth; rainCanvas.height = window.innerHeight; initColumns(); }
     window.addEventListener('resize', resizeCanvas);
 
-    const glyphs = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ0123456789';
+    const glyphs = 'アァカサタナハマヤャラワガザダバパ...0123456789';
     let cols = [], fontSize = 16;
 
     function initColumns(){
@@ -175,13 +122,11 @@
     }
 
     function drawRain(){
-      if(!rainOn) return;
       rctx.fillStyle = 'rgba(10, 15, 20, 0.1)';
       rctx.fillRect(0,0,rainCanvas.width,rainCanvas.height);
 
       rctx.fillStyle = '#00ffd0';
       rctx.font = fontSize + 'px "Share Tech Mono"';
-
       cols.forEach((y, i) => {
         const text = glyphs[Math.floor(Math.random()*glyphs.length)];
         const x = i * fontSize;
@@ -194,11 +139,8 @@
     resizeCanvas();
     requestAnimationFrame(drawRain);
 
-    /* ============================
-       FIRE (CSS flames)
-       ============================ */
+    /* FIRE */
     const fireHost = document.getElementById('fire');
-    let fireOn = true;
     function buildFlames(){
       fireHost.innerHTML = '';
       const w = window.innerWidth; const count = Math.min(220, Math.floor(w / 8));
@@ -211,46 +153,8 @@
         fireHost.appendChild(el);
       }
     }
-    window.addEventListener('resize', () => fireOn && buildFlames());
+    window.addEventListener('resize', buildFlames);
     buildFlames();
-
-    /* ============================
-       CONTROLS
-       ============================ */
-    const toggleRainBtn = document.getElementById('toggle-rain');
-    const toggleFireBtn = document.getElementById('toggle-fire');
-    const togglePulseBtn = document.getElementById('toggle-pulse');
-    const toggleContrastBtn = document.getElementById('toggle-contrast');
-
-    toggleRainBtn.addEventListener('click', () => {
-      rainOn = !rainOn;
-      toggleRainBtn.textContent = rainOn ? 'Matikan Hujan Kode' : 'Nyalakan Hujan Kode';
-      toggleRainBtn.setAttribute('aria-pressed', String(rainOn));
-      if(rainOn) requestAnimationFrame(drawRain);
-    });
-
-    toggleFireBtn.addEventListener('click', () => {
-      fireOn = !fireOn;
-      toggleFireBtn.textContent = fireOn ? 'Matikan Api' : 'Nyalakan Api';
-      toggleFireBtn.setAttribute('aria-pressed', String(fireOn));
-      document.querySelector('.fire-wrap').style.display = fireOn ? 'flex' : 'none';
-      if(fireOn) buildFlames();
-    });
-
-    togglePulseBtn.addEventListener('click', () => {
-      const pulseEl = document.querySelector('.pulse');
-      const active = pulseEl.style.animationPlayState !== 'paused';
-      pulseEl.style.animationPlayState = active ? 'paused' : 'running';
-      togglePulseBtn.textContent = active ? 'Nyalakan Teks Neon' : 'Matikan Teks Neon';
-      togglePulseBtn.setAttribute('aria-pressed', String(!active));
-    });
-
-    let highContrast = false;
-    toggleContrastBtn.addEventListener('click', () => {
-      highContrast = !highContrast;
-      document.documentElement.style.setProperty('--accent', highContrast ? '#66ff00' : '#00ffd0');
-      document.documentElement.style.setProperty('--danger', highContrast ? '#ff3300' : '#ff004c');
-    });
   </script>
 </body>
 </html>
